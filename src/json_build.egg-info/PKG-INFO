@@ -1,0 +1,16 @@
+Metadata-Version: 2.1
+Name: json-build
+Version: 0.0.1
+Summary: A package to help build and save JSON files
+Home-page: https://github.com/pypa/sampleproject
+Author: Vince
+Author-email: vincent.berry11@gmail.com
+Project-URL: Bug Tracker, https://github.com/vaberry/json-build
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+License-File: LICENSE
+
+# json-build

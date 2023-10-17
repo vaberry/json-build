@@ -1,0 +1,10 @@
+LICENSE
+README.md
+pyproject.toml
+setup.cfg
+src/json_build/__init__.py
+src/json_build/main.py
+src/json_build.egg-info/PKG-INFO
+src/json_build.egg-info/SOURCES.txt
+src/json_build.egg-info/dependency_links.txt
+src/json_build.egg-info/top_level.txt
