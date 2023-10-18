@@ -54,8 +54,27 @@ class JSON_Object:
             current_dict = current_dict[key]
         current_dict[dict_navigation[-1]] = data
 
-
     def save(self, file_name, location_path=None):
+
+        '''
+        in display_dict, replace current unique name keywords with new keywords
+        '''
+        def replace_keys_with_map(input_dict, key_map):
+            if isinstance(input_dict, dict):
+                new_dict = {}
+                for key, value in input_dict.items():
+                    new_key = key_map.get(key, key)
+                    new_dict[new_key] = replace_keys_with_map(value, key_map)
+                return new_dict
+            elif isinstance(input_dict, list):
+                return [replace_keys_with_map(item, key_map) for item in input_dict]
+            else:
+                return input_dict
+        self.display_dict = replace_keys_with_map(self.display_dict, self.unique_to_keyword_map)
+
+
+        if not file_name.endswith('.json'):
+            file_name = file_name.split('.')[0] + '.json'
         if location_path and not os.path.exists(location_path):
             os.makedirs(location_path)        
             file_path = os.path.join(location_path, file_name)
