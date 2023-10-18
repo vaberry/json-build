@@ -57,7 +57,7 @@ class JSON_Object:
     def save(self, file_name, location_path=None):
 
         '''
-        in display_dict, replace current unique name keywords with new keywords
+        in display_dict, replace current unique name keywords with display name keywords
         '''
         def replace_keys_with_map(input_dict, key_map):
             if isinstance(input_dict, dict):
