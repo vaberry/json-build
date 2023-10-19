@@ -13,7 +13,10 @@ pip install json-build
 ```python
 from json_build import JSON_Object
 
-new_json = JSON_Object()
+new_json = JSON_Object(outer=[])
+## 'outer' is optional
+## if '[]' is passed it will wrap the JSON object in an array (Python list)
+## otherwise, it will be a JSON object (Python dictionary)
 ```
 
 ## Nest objects inside the JSON object

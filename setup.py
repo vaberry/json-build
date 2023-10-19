@@ -11,7 +11,6 @@ VERSION = '0.0.26'
 DESCRIPTION = 'JSON file builder'
 LONG_DESCRIPTION = 'A package that allows developers to build and save JSON files quickly.'
 
-# Setting up
 setup(
     name="json-build",
     version=VERSION,
