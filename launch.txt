@@ -1,46 +1,5 @@
-build command: python3 -m build
-upload command: python3 -m twine upload dist/*
+build command:
+python3 -m build
 
-
-
-
-[build-system]
-requires = [
-    "setuptools",
-    "wheel"
-]
-build-backend = "setuptools.build_meta"
-
-[metadata]
-name = jsonbuild
-version = 1.0.0
-author = Vince
-author_email = vincent.berry11@gmail.com
-description = A package to help build and save JSON files
-long_description = file: README.md
-long_description_content_type = text/markdown
-url = https://github.com/vaberry/json-build
-project_urls =
-    Bug Tracker = https://github.com/vaberry/json-build
-classifiers =
-    Programming Language :: Python :: 3
-    License :: OSI Approved :: MIT License
-    Operating System :: OS Independent
-
-[options]
-package_dir =
-    = src
-packages = find:
-python_requires = >=3.6
-
-[options.packages.find]
-where = src
-
-
-[distutils]
-index-servers = pypi
-
-[pypi]
-repository = https://pypi.python.org/pypi
-username = __token__
-password = pypi-AgEIcHlwaS5vcmcCJGRkYjAxNWQ3LWVkZjQtNDg1MC1iN2M1LTEzYTNkMjMyYmFmNAACKlszLCJmMzc5N2M2MS1jYjQ5LTQ5Y2UtODBkMC1hNTc4YjkyN2E2OWQiXQAABiA5XJ33_0yWBb2HkelOBcBcxLrcdqmOkg7ixmQr2qMYqg
+upload command:
+python3 -m twine upload dist/*

@@ -54,6 +54,9 @@ class JSON_Object:
             current_dict = current_dict[key]
         current_dict[dict_navigation[-1]] = data
 
+    def create(self):
+        return json.dumps(self.display_dict, indent=4)
+
     def save(self, file_name, location_path=None):
 
         '''
