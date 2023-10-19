@@ -9,7 +9,6 @@ class JSON_Object:
         self.child_to_parent_map = {}
         self.display_dict = {}
     
-    
     def add_object(self, unique_name, keyword, data, parent=None):
         '''
         update the unique_to_keyword_map or raise error if unique_name already exists
@@ -54,7 +53,6 @@ class JSON_Object:
                 current_dict[key] = {}
             current_dict = current_dict[key]
         current_dict[dict_navigation[-1]] = data
-
 
         # def replace_keys_with_map(input_dict, key_map):
         #     current_dict = input_dict
