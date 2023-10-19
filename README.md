@@ -14,6 +14,7 @@ pip install json-build
 from json_build import JSON_Object
 
 new_json = JSON_Object(outer=[])
+
 ## 'outer' is optional
 ## if 'outer=[]' is passed it will wrap the JSON object in an array (Python list)
 ## otherwise, it will be a JSON object (Python dictionary)
@@ -56,6 +57,16 @@ new_json.add_object(
     parent = 'person_2'
 )
 
+new_json.add_object(
+    unique_name = 'movies',
+    keyword = 'movies',
+    data = [
+        'Halloween',
+        'Friday the 13th',
+        'Nightmare on Elm Street',
+    ],
+)
+
 ## 'parent' is optional; if unpassed, the object will be added to the outer layer
 ## Note that 'parent' uses the unique_name of the parent object, and not the keyword
 ```
@@ -96,6 +107,11 @@ new_json.save(file_name="killer_names", location_path="C:/Users/fkrueger/Desktop
                 "relation": "Mother"
             }
         }
-    }
+    },
+    "movies": [
+        "Halloween",
+        "Friday the 13th",
+        "Nightmare on Elm Street"
+    ]
 }
 ```
