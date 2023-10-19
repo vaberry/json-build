@@ -9,6 +9,7 @@ class JSON_Object:
         self.child_to_parent_map = {}
         self.display_dict = {}
     
+    
     def add_object(self, unique_name, keyword, data, parent=None):
         '''
         update the unique_to_keyword_map or raise error if unique_name already exists
@@ -54,11 +55,40 @@ class JSON_Object:
             current_dict = current_dict[key]
         current_dict[dict_navigation[-1]] = data
 
+
+        # def replace_keys_with_map(input_dict, key_map):
+        #     current_dict = input_dict
+        #     if isinstance(current_dict, dict):
+        #         new_dict = {}
+        #         for key, value in current_dict.items():
+        #             new_key = key_map.get(key, key)
+        #             new_dict[new_key] = replace_keys_with_map(value, key_map)
+        #         print("new_dict:", new_dict)
+        #         return new_dict
+        #     elif isinstance(current_dict, list):
+        #         return [replace_keys_with_map(item, key_map) for item in current_dict]
+        #     else:
+        #         return current_dict
+            
+        # self.display_dict = replace_keys_with_map(self.display_dict, self.unique_to_keyword_map)
+
     def create(self):
+        def replace_keys_with_map(input_dict, key_map):
+            if isinstance(input_dict, dict):
+                new_dict = {}
+                for key, value in input_dict.items():
+                    new_key = key_map.get(key, key)
+                    new_value = replace_keys_with_map(value, key_map)
+                    new_dict[new_key] = new_value
+                return new_dict
+            elif isinstance(input_dict, list):
+                return [replace_keys_with_map(item, key_map) for item in input_dict]
+            else:
+                return input_dict
+        self.display_dict = replace_keys_with_map(self.display_dict, self.unique_to_keyword_map)        
         return json.dumps(self.display_dict, indent=4)
 
     def save(self, file_name, location_path=None):
-
         '''
         in display_dict, replace current unique name keywords with display name keywords
         '''
@@ -67,7 +97,8 @@ class JSON_Object:
                 new_dict = {}
                 for key, value in input_dict.items():
                     new_key = key_map.get(key, key)
-                    new_dict[new_key] = replace_keys_with_map(value, key_map)
+                    new_value = replace_keys_with_map(value, key_map)
+                    new_dict[new_key] = new_value
                 return new_dict
             elif isinstance(input_dict, list):
                 return [replace_keys_with_map(item, key_map) for item in input_dict]
