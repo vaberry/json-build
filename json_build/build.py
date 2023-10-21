@@ -9,7 +9,7 @@ class JSON_Object:
         self.__created = False
 
     '''
-    This function updates the object model's master_dict attr with the data needed to create the JSON object
+    This function updates the object model's __master_dict attr with the data needed to create the JSON object
     '''
     def add_object(self, unique_name, keyword, data, parent=None):
         unique_name = unique_name.strip()
@@ -30,7 +30,7 @@ class JSON_Object:
             raise ValueError(f"Unique name '{unique_name}' already exists")
         
     '''
-    This function creates the object model's master_json attr (Python dict) and dumps that dict into a JSON object
+    This function creates the object model's __master_json attr (Python dict) and dumps that dict into a JSON object
     '''
     def create(self):
         if not self.__created: # This ensures that the master_json dict creation only happens once
