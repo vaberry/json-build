@@ -8,6 +8,9 @@ class JSON_Object:
         self.__master_json = {}
         self.__created = False
 
+    '''
+    This function updates the object model's master_dict attr with the data needed to create the JSON object
+    '''
     def add_object(self, unique_name, keyword, data, parent=None):
         unique_name = unique_name.strip()
         keyword = keyword.strip()
@@ -26,17 +29,20 @@ class JSON_Object:
         else:
             raise ValueError(f"Unique name '{unique_name}' already exists")
         
+    '''
+    This function creates the object model's master_json attr (Python dict) and dumps that dict into a JSON object
+    '''
     def create(self):
-        if not self.__created:
+        if not self.__created: # This ensures that the master_json dict creation only happens once
             self.__created = True
             for _, value in self.__master_dict.items():
                 if value["parent"]:
-                    # HOW TO HANDLE IF PARENT OF OBJECT IS A LIST
+                    # How to handle if parent of object is a list
                     if isinstance(self.__master_dict[value["parent"]]["data"], list):
                         if value["data"] not in self.__master_dict[value["parent"]]["data"]: # If dict object is not already in the list (no dupes)
                             self.__master_dict[value["parent"]]["data"].append(value["data"])
 
-                    # HOW TO HANDLE IF PARENT OF OBJECT IS A DICT
+                    # How to handle if parent of object is a dict
                     else:
                         if value["keyword"] not in self.__master_dict[value["parent"]]["data"].keys():
                             self.__master_dict[value["parent"]]["data"][value["keyword"]] = value["data"]
@@ -47,6 +53,10 @@ class JSON_Object:
         to_dump = [self.__master_json] if isinstance(self.__outer, list) else self.__master_json     
         return json.dumps(to_dump, indent=4)
     
+
+    '''
+    This function calls the create() method, then saves the returned JSON object to a file
+    '''
     def save(self, file_name, location_path=None):
         if not file_name.endswith('.json'):
             file_name = file_name.split('.')[0] + '.json'
