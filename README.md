@@ -15,9 +15,9 @@ from json_build import JSON_Object
 
 new_json = JSON_Object(outer=[])
 
-## 'outer' is optional
-## if 'outer=[]' is passed it will wrap the JSON object in an array (Python list)
-## otherwise, it will be a JSON object (Python dictionary)
+# 'outer' argument is optional
+# if 'outer=[]' is passed it will wrap the JSON object in an array (Python list)
+# otherwise, it will be a JSON object (Python dictionary)
 ```
 
 ## Nest objects inside the JSON object
@@ -67,8 +67,8 @@ new_json.add_object(
     ],
 )
 
-## 'parent' is optional; if unpassed, the object will be added to the outer layer
-## Note that 'parent' uses the unique_name of the parent object, and not the keyword
+# 'parent' argument is optional; if unpassed, the object will be added to the JSON object's first level
+# Note that 'parent' uses the unique_name of the parent object, and not the keyword
 ```
 
 ## Create the JSON object
@@ -82,7 +82,7 @@ new_json.create()
 ```python
 new_json.save(file_name="killer_names", location_path="C:/Users/fkrueger/Desktop/")
 
-## 'location_path' is optional; if unpassed it will save the file to the root of your local project
+# 'location_path' argument is optional; if unpassed it will save the file to the root of your local project
 ```
 
 ## Resultant JSON object

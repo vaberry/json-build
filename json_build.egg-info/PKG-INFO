@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: json-build
-Version: 0.0.30
+Version: 0.0.31
 Summary: JSON file builder
 Author: Vince Berry
 Author-email: vincent.berry11@gmail.com
@@ -32,7 +32,7 @@ from json_build import JSON_Object
 
 new_json = JSON_Object(outer=[])
 
-## 'outer' is optional
+## 'outer' argument is optional
 ## if 'outer=[]' is passed it will wrap the JSON object in an array (Python list)
 ## otherwise, it will be a JSON object (Python dictionary)
 ```
@@ -84,7 +84,7 @@ new_json.add_object(
     ],
 )
 
-## 'parent' is optional; if unpassed, the object will be added to the outer layer
+## 'parent' argument is optional; if unpassed, the object will be added to the outer layer
 ## Note that 'parent' uses the unique_name of the parent object, and not the keyword
 ```
 
@@ -99,7 +99,7 @@ new_json.create()
 ```python
 new_json.save(file_name="killer_names", location_path="C:/Users/fkrueger/Desktop/")
 
-## 'location_path' is optional; if unpassed it will save the file to the root of your local project
+## 'location_path' argument is optional; if unpassed it will save the file to the root of your local project
 ```
 
 ## Resultant JSON object
