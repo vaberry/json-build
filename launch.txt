@@ -3,3 +3,7 @@ python3 -m build
 
 upload command:
 python3 -m twine upload --skip-existing dist/*
+
+username: __token__
+password: <token>
+```

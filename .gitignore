@@ -1,2 +1,4 @@
 old/
 test.py
+.env
+env/

@@ -32,7 +32,34 @@ class JSON_Object:
     '''
     This function creates the object model's __master_json attr (Python dict) and dumps that dict into a JSON object
     '''
-    def create(self):
+
+    def update_data(self, unique_name, new_data, reset_data=False):
+        if not isinstance(new_data, dict) and not isinstance(new_data, list):
+            raise ValueError(f"Data must be of type dict or list, not {type(new_data)}")
+        elif unique_name not in self.__master_dict.keys():
+            raise ValueError(f"Unique name '{unique_name}' does not exist")
+        else:
+            if isinstance(new_data, dict):
+                if not isinstance(self.__master_dict[unique_name]["data"], dict):
+                    raise ValueError(f"Data must be of type dict, not {type(self.__master_dict[unique_name]['data'])}")
+                else:
+                    if reset_data:
+                        self.__master_dict[unique_name]["data"] = new_data
+                    else:
+                        self.__master_dict[unique_name]["data"].update(new_data)
+            elif isinstance(new_data, list):
+                if not isinstance(self.__master_dict[unique_name]["data"], list):
+                    raise ValueError(f"Data must be of type list, not {type(self.__master_dict[unique_name]['data'])}")
+                else:
+                    if reset_data:
+                        self.__master_dict[unique_name]["data"] = new_data
+                    else:
+                        self.__master_dict[unique_name]["data"].extend(new_data)
+            print(self.__master_dict[unique_name]["data"])
+
+
+
+    def create(self, collapse=False):
         if not self.__created: # This ensures that the master_json dict creation only happens once
             self.__created = True
             for _, value in self.__master_dict.items():
@@ -50,8 +77,11 @@ class JSON_Object:
                             raise ValueError(f"You are trying to add a duplicate keyword ('{value['keyword']}'). Please change one of the keywords.")
                 else:
                     self.__master_json[value["keyword"]] = value["data"]
-        to_dump = [self.__master_json] if isinstance(self.__outer, list) else self.__master_json     
-        return json.dumps(to_dump, indent=4)
+        to_dump = [self.__master_json] if isinstance(self.__outer, list) else self.__master_json
+        if collapse:
+            return json.dumps(to_dump)
+        else:    
+            return json.dumps(to_dump, indent=4)
     
 
     '''

@@ -87,31 +87,33 @@ new_json.save(file_name="killer_names", location_path="C:/Users/fkrueger/Desktop
 
 ## Resultant JSON object
 ```json
-{
-    "people": {
-        "person1": {
-            "first_name": "Michael",
-            "last_name": "Myers",
-            "relative": {
-                "first_name": "Laurie",
-                "last_name": "Strode",
-                "relation": "Sister"
+[
+    {
+        "people": {
+            "person1": {
+                "first_name": "Michael",
+                "last_name": "Myers",
+                "relative": {
+                    "first_name": "Laurie",
+                    "last_name": "Strode",
+                    "relation": "Sister"
+                }
+            },
+            "person2": {
+                "first_name": "Jason",
+                "last_name": "Voorhees",
+                "relative": {
+                    "first_name": "Pamela",
+                    "last_name": "Voorhees",
+                    "relation": "Mother"
+                }
             }
         },
-        "person2": {
-            "first_name": "Jason",
-            "last_name": "Voorhees",
-            "relative": {
-                "first_name": "Pamela",
-                "last_name": "Voorhees",
-                "relation": "Mother"
-            }
-        }
-    },
-    "movies": [
-        "Halloween",
-        "Friday the 13th",
-        "Nightmare on Elm Street"
-    ]
-}
+        "movies": [
+            "Halloween",
+            "Friday the 13th",
+            "Nightmare on Elm Street"
+        ]
+    }
+]
 ```
