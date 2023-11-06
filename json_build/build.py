@@ -57,7 +57,7 @@ class JSON_Object:
                         self.__master_dict[unique_name]["data"].extend(new_data)
 
 
-    def create(self, collapse=False):
+    def create(self, collapse=False, trim=False):
         if not self.__created: # This ensures that the master_json dict creation only happens once
             self.__created = True
             for _, value in self.__master_dict.items():
@@ -76,6 +76,38 @@ class JSON_Object:
                 else:
                     self.__master_json[value["keyword"]] = value["data"]
         to_dump = [self.__master_json] if isinstance(self.__outer, list) else self.__master_json
+        
+        if trim:
+            def remove_null_empty_values(data):
+                if isinstance(data, dict):
+                    data_copy = data.copy()
+                    for key, value in data_copy.items():
+                        if value is None:
+                            del data[key]
+                        elif isinstance(value, (list, dict)):
+                            cleaned_value = remove_null_empty_values(value)
+                            if not cleaned_value:
+                                del data[key]
+                            else:
+                                data[key] = cleaned_value
+                    return data
+                elif isinstance(data, list):
+                    data_copy = data.copy()
+                    for item in data_copy:
+                        if item is None:
+                            data.remove(item)
+                        elif isinstance(item, (list, dict)):
+                            cleaned_item = remove_null_empty_values(item)
+                            if not cleaned_item:
+                                data.remove(item)
+                            else:
+                                data[data.index(item)] = cleaned_item
+                    return data
+                else:
+                    return data
+                
+            to_dump = remove_null_empty_values(to_dump)
+        
         if collapse:
             return json.dumps(to_dump)
         else:    
