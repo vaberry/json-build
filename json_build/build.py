@@ -55,8 +55,6 @@ class JSON_Object:
                         self.__master_dict[unique_name]["data"] = new_data
                     else:
                         self.__master_dict[unique_name]["data"].extend(new_data)
-            print(self.__master_dict[unique_name]["data"])
-
 
 
     def create(self, collapse=False):
