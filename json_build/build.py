@@ -7,6 +7,7 @@ class JSON_Object:
         self.__master_dict = {}
         self.__master_json = {}
         self.__created = False
+        self.display_dict = self.__master_dict
 
     '''
     This function updates the object model's __master_dict attr with the data needed to create the JSON object
@@ -58,7 +59,7 @@ class JSON_Object:
 
 
     def create(self, collapse=False, trim=False):
-        if not self.__created: # This ensures that the master_json dict creation only happens once
+        if not self.__created: # This ensures that the master_json dict creation only happens once during the script run
             self.__created = True
             for _, value in self.__master_dict.items():
                 if value["parent"]:
