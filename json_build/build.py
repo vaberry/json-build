@@ -1,11 +1,12 @@
 import json
 import os
+from collections import OrderedDict
 
 class JSON_Object:
     def __init__(self, outer=None):
         self.__outer = outer if isinstance(outer, list) else None
-        self.__master_dict = {}
-        self.__master_json = {}
+        self.__master_dict = OrderedDict()
+        self.__master_json = OrderedDict()
         self.__created = False
         self.display_dict = self.__master_dict
 
