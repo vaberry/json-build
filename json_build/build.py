@@ -33,24 +33,24 @@ class JSON_Object:
                     data = json.load(f)
             else:
                 raise Exception('Invalid JSON location or not a JSON file')
-            def transform_to_tuple_keys(input_dict):
-                output_dict = {}
-                def traverse_dict(d, keys=()):
-                    for key, value in d.items():
-                        new_keys = keys + (key,)
-                        if isinstance(value, dict) and value:
-                            traverse_dict(value, new_keys)
-                        else:
-                            output_dict[new_keys] = value
-                traverse_dict(input_dict)
-                return output_dict
-            flat_dict = transform_to_tuple_keys(data)
-            for k,v in flat_dict.items():
-                unique_name = '_'.join(k)
-                self.master_data[unique_name] = {}
-                self.master_data[unique_name]['location'] = k
-                self.master_data[unique_name]['keyword'] = k[-1]
-                self.master_data[unique_name]['data'] = v
+        def transform_to_tuple_keys(input_dict):
+            output_dict = {}
+            def traverse_dict(d, keys=()):
+                for key, value in d.items():
+                    new_keys = keys + (key,)
+                    if isinstance(value, dict) and value:
+                        traverse_dict(value, new_keys)
+                    else:
+                        output_dict[new_keys] = value
+            traverse_dict(input_dict)
+            return output_dict
+        flat_dict = transform_to_tuple_keys(data)
+        for k,v in flat_dict.items():
+            unique_name = '_'.join(k)
+            self.master_data[unique_name] = {}
+            self.master_data[unique_name]['location'] = k
+            self.master_data[unique_name]['keyword'] = k[-1]
+            self.master_data[unique_name]['data'] = v
 
     """
     Adds a new entry to the master_data dictionary
