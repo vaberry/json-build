@@ -49,8 +49,10 @@ class JSON_Object:
             unique_name = '_'.join(k)
             self.master_data[unique_name] = {}
             self.master_data[unique_name]['location'] = k
+            self.master_data[unique_name]['category'] = k[1]
             self.master_data[unique_name]['keyword'] = k[-1]
             self.master_data[unique_name]['data'] = v
+            self.master_data[unique_name]['show'] = False
 
     """
     Adds a new entry to the master_data dictionary
@@ -115,16 +117,22 @@ class JSON_Object:
     """
     Uses the master_data dictionary to create a JSON object
     """
-    def create(self, collapse=False, trim=False):
+    def create(self, collapse=False, trim=False, master_data=None):
+        if master_data:
+            if isinstance(master_data, dict):
+                self.master_data = master_data
+            else:
+                raise Exception('Master data must be a dict')
         new_dict = {}
         current_dict = new_dict
         for _,v in self.master_data.items():
-            for item in v['location'][:-1]:
-                if not item in current_dict.keys():
-                    current_dict[item] = {}
-                current_dict = current_dict[item]
-            current_dict[v['location'][-1]] = v['data']
-            current_dict = new_dict
+            if v['show']:
+                for item in v['location'][:-1]:
+                    if not item in current_dict.keys():
+                        current_dict[item] = {}
+                    current_dict = current_dict[item]
+                current_dict[v['location'][-1]] = v['data']
+                current_dict = new_dict
         to_dump = new_dict
 
         if trim:
