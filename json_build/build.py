@@ -117,13 +117,13 @@ class JSON_Object:
     """
     Uses the master_data dictionary to create a JSON object
     """
-    def create(self, collapse=False, trim=False, master_data=None):
+    def create(self, collapse=False, master_data=None):
         if master_data:
             if isinstance(master_data, dict):
                 self.master_data = master_data
             else:
                 raise Exception('Master data must be a dict')
-        new_dict = {}
+        new_dict = OrderedDict()
         current_dict = new_dict
         for _,v in self.master_data.items():
             if v['show']:
@@ -135,35 +135,35 @@ class JSON_Object:
                 current_dict = new_dict
         to_dump = new_dict
 
-        if trim:
-            def remove_null_empty_values(data):
-                if isinstance(data, dict):
-                    data_copy = data.copy()
-                    for key, value in data_copy.items():
-                        if value is None:
-                            del data[key]
-                        elif isinstance(value, (list, dict)):
-                            cleaned_value = remove_null_empty_values(value)
-                            if not cleaned_value:
-                                del data[key]
-                            else:
-                                data[key] = cleaned_value
-                    return data
-                elif isinstance(data, list):
-                    data_copy = data.copy()
-                    for item in data_copy:
-                        if item is None:
-                            data.remove(item)
-                        elif isinstance(item, (list, dict)):
-                            cleaned_item = remove_null_empty_values(item)
-                            if not cleaned_item:
-                                data.remove(item)
-                            else:
-                                data[data.index(item)] = cleaned_item
-                    return data
-                else:
-                    return data
-            to_dump = remove_null_empty_values(to_dump)
+        # if trim:
+        #     def remove_null_empty_values(data):
+        #         if isinstance(data, dict):
+        #             data_copy = data.copy()
+        #             for key, value in data_copy.items():
+        #                 if value is None:
+        #                     del data[key]
+        #                 elif isinstance(value, (list, dict)):
+        #                     cleaned_value = remove_null_empty_values(value)
+        #                     if not cleaned_value:
+        #                         del data[key]
+        #                     else:
+        #                         data[key] = cleaned_value
+        #             return data
+        #         elif isinstance(data, list):
+        #             data_copy = data.copy()
+        #             for item in data_copy:
+        #                 if item is None:
+        #                     data.remove(item)
+        #                 elif isinstance(item, (list, dict)):
+        #                     cleaned_item = remove_null_empty_values(item)
+        #                     if not cleaned_item:
+        #                         data.remove(item)
+        #                     else:
+        #                         data[data.index(item)] = cleaned_item
+        #             return data
+        #         else:
+        #             return data
+        #     to_dump = remove_null_empty_values(to_dump)
 
         if collapse:
             return json.dumps(to_dump)
