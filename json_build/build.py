@@ -49,7 +49,7 @@ class JSON_Object:
             unique_name = '_'.join(k)
             self.master_data[unique_name] = {}
             self.master_data[unique_name]['location'] = k
-            self.master_data[unique_name]['category'] = k[1]
+            self.master_data[unique_name]['category'] = k[1] if len(k) > 1 else k[-1]
             self.master_data[unique_name]['keyword'] = k[-1]
             self.master_data[unique_name]['data'] = v
             self.master_data[unique_name]['show'] = False
